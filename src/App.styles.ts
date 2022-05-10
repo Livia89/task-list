@@ -12,8 +12,8 @@ export const Area = styled.div`
     padding: 10px;
 `;
 
-export const Header = styled.h1`
-    margin: 0;
+export const Title = styled.h1`
+    margin: 0 0 10px 0 ;
     padding: 0 0 20px 0;
     color: #fff;
     text-align: center;
