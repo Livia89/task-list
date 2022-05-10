@@ -1,29 +1,39 @@
-import { useState } from 'react';
-import * as C from './App.styles';
-import { Item } from './types/Item';
-import {ItemList} from './components/ListItem'
-//import { Container } from "./App.styles"; 
+import { useState } from "react";
+import * as C from "./App.styles";
+import { Item } from "./types/Item";
+import { ItemList } from "./components/ListItem";
+import { AddTask } from "./components/AddTask";
+
+//import { Container } from "./App.styles";
 
 const App = () => {
-  
-  const [list, useList] = useState<Item[]>([
-    {id: 1, name: 'Eat chocolate', done: false},
-    {id: 2, name: 'Drink water', done: true},
+  const [list, setList] = useState<Item[]>([
+    { id: 1, name: "Eat chocolate", done: false },
+    { id: 2, name: "Drink water", done: true },
   ]);
 
+  const handleAddTask = (taskName: string) => {
+    let newList = [...list];
+    newList.push({
+      id: list.length + 1,
+      name: taskName,
+      done: false,
+    });
+    setList(newList);
+  };
   return (
     <C.Container>
       <C.Area>
-        <C.Title>Tasks List</C.Title> 
-        { /* Area to add task  */}
-
-        { /* Tasks List   */}
+        <C.Title>Tasks List</C.Title>
+        {/* Area to add task  */}
+        <AddTask onEnter={handleAddTask} />
+        {/* Tasks List   */}
         {list.map((item, idx) => (
-            <ItemList key={idx} item={item}/>
+          <ItemList key={idx} item={item} />
         ))}
       </C.Area>
-    </C.Container> 
+    </C.Container>
   );
-}
+};
 
 export default App;
