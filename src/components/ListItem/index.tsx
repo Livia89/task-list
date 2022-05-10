@@ -5,18 +5,20 @@ import { Item } from "../../types/Item"; // Item types
 // Typescript creation 'props'
 type Props = {
   item: Item;
+  onChange: (id: number, status: boolean) => void;
 };
 
-export const ItemList = ({ item }: Props) => {
-  const [isChecked, setIsChecked] = useState(item.done);
+export const ItemList = ({ item, onChange }: Props) => {
   return (
-    <S.Container done={isChecked}>
+    <S.Container done={item.done}>
       <input
         type="checkbox"
-        checked={isChecked}
-        onChange={(e) => setIsChecked(e.target.checked)}
+        checked={item.done}
+        onChange={(e) => onChange(item.id, e.target.checked)}
       />
-      <label>{item.name}</label>
+      <label>
+        {item.name} {item.done.toString()}
+      </label>
     </S.Container>
   );
 };

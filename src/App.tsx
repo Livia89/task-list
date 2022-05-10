@@ -21,6 +21,17 @@ const App = () => {
     });
     setList(newList);
   };
+
+  const updateStatus = (id: number, status: boolean) => {
+    let newList = [...list];
+    for (let task in newList) {
+      if (newList[task].id === id) {
+        newList[task].done = status;
+      }
+    }
+    setList(newList);
+  };
+
   return (
     <C.Container>
       <C.Area>
@@ -29,7 +40,7 @@ const App = () => {
         <AddTask onEnter={handleAddTask} />
         {/* Tasks List   */}
         {list.map((item, idx) => (
-          <ItemList key={idx} item={item} />
+          <ItemList key={idx} item={item} onChange={updateStatus} />
         ))}
       </C.Area>
     </C.Container>
